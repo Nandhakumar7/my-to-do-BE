@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  db:
+    image: mongo:latest
+    volumes:
+      - './data:/data/db'
+    ports :
+      - '27017:27017'
+  rest-api-node:
+    build: .
+    ports:
+      - '3400:3400'
+    links:
+      - db
+    restart: on-failure
